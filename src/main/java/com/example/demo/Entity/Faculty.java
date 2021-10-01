@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -17,12 +17,14 @@ public class Faculty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Integer id;
-    String name;
+    @Column(name = "faculty_id")
+    private Integer id;
 
-//    @OneToMany(mappedBy = "faculty_id")
-//    private Set<Course> courses;
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany(mappedBy = "user_id")
+    private Set<User> users = new HashSet<>();
 
 
 }

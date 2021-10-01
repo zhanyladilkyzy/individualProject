@@ -20,9 +20,9 @@ public class Exam {
     @Column(name = "id")
     private Long id;
 
-    @Column(name="course_id")
-    private Long courseId;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_id")
+    private Course course;
 
     @Column(name="exam_date")
     private Date date;

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.annotation.sql.DataSourceDefinition;
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table
 @AllArgsConstructor
 @NoArgsConstructor
-public class Users {
+public class User {
 
     @Id
     @Column(name = "user_id")
@@ -33,13 +34,17 @@ public class Users {
     @Column(name="password")
     String password;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
-            joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "user_id"),
-            inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id"))
-    private Set<Roles> roles;
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Roles> roles = new HashSet<>();
+//    @JoinColumns({
+//            @JoinColumn(name = "user_id"),
+//            @JoinColumn(name = "role_id", referencedColumnName = "role_id")
+//    })
+//    private Set<Roles> roles;
 
 }

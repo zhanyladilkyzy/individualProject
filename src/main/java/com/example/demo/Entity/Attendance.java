@@ -16,10 +16,10 @@ public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "attendance_id")
     private Long id;
 
-    @Column(name="course_id")
+    @Column(name="date")
     private Date date;
 
     @Column(name="student_id")
@@ -29,7 +29,7 @@ public class Attendance {
     @Column(name="teacher_id")
     private Long teacherId;
 
-
-    @Column(name="course_id")
-    private Long courseId;
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
 }
